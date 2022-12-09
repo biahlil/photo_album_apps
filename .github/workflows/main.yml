@@ -1,13 +1,19 @@
 name: Testing this apps
 run-name: ${{ github.actor }} Testing this apps 
-on: pull_request
+on: 
+  push:
+    branches:
+      - main
 jobs:
-  check-bats-version:
+  test:
     runs-on: ubuntu-latest
     steps:
+      - name: setup node
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: '16'
-      - run: npm install -g bats
-      - run: bats -v
+      - name: Install Dependencies
+      - run: npm install dependencies
+      - name: Launch the apps
+      - run: npm start
